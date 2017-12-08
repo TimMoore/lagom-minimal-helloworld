@@ -1,0 +1,53 @@
+<assembly xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.3"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.3 http://maven.apache.org/xsd/assembly-1.1.3.xsd">
+    <id>production-dist</id>
+    <formats>
+        <format>zip</format>
+    </formats>
+    <baseDirectory>hello</baseDirectory>
+
+    <!-- Configuration adapted from https://play2-maven-plugin.github.io/play2-maven-plugin/1.0.0-rc1/custom-distribution.html -->
+
+    <dependencySets>
+        <dependencySet>
+            <outputDirectory>lib</outputDirectory>
+            <outputFileNameMapping>
+                ${artifact.groupId}-${artifact.artifactId}-${artifact.version}${dashClassifier?}.${artifact.extension}
+            </outputFileNameMapping>
+        </dependencySet>
+    </dependencySets>
+
+    <fileSets>
+        <fileSet>
+            <directory>${basedir}/src/dist/bin</directory>
+            <outputDirectory>bin</outputDirectory>
+            <fileMode>755</fileMode>
+            <lineEnding>unix</lineEnding>
+            <includes>
+                <include>start</include>
+                <include>stop</include>
+            </includes>
+        </fileSet>
+
+        <fileSet>
+            <directory>${basedir}/src/dist/bin</directory>
+            <outputDirectory>bin</outputDirectory>
+            <lineEnding>windows</lineEnding>
+            <includes>
+                <include>start.bat</include>
+                <include>stop.bat</include>
+            </includes>
+        </fileSet>
+
+        <!-- empty 'logs' directory -->
+        <fileSet>
+            <directory>.</directory>
+            <outputDirectory>logs</outputDirectory>
+            <excludes>
+                <exclude>*/**</exclude>
+            </excludes>
+        </fileSet>
+    </fileSets>
+
+</assembly>

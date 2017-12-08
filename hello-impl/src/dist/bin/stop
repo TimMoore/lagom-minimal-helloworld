@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+# From https://play2-maven-plugin.github.io/play2-maven-plugin/1.0.0-rc1/custom-distribution.html
+kill $(cat RUNNING_PID)

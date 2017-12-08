@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+# From https://play2-maven-plugin.github.io/play2-maven-plugin/1.0.0-rc1/custom-distribution.html
+scriptdir=`dirname $0`
+basedir="$scriptdir/.."
+classpath=$basedir/lib/*
+nohup java $* -cp "$classpath" play.core.server.ProdServerStart $basedir > $basedir/logs/system.out 2>&1 &
