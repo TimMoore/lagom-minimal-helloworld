@@ -13,26 +13,26 @@ import java.util.concurrent.CompletableFuture;
  */
 public class StreamSubscriber {
 
-  @Inject
-  public StreamSubscriber(HelloService helloService, StreamRepository repository) {
-    // Create a subscriber
-    helloService.helloEvents().subscribe()
-      // And subscribe to it with at least once processing semantics.
-      .atLeastOnce(
-        // Create a flow that emits a Done for each message it processes
-        Flow.<HelloEvent>create().mapAsync(1, event -> {
+    @Inject
+    public StreamSubscriber(HelloService helloService, StreamRepository repository) {
+        // Create a subscriber
+        helloService.helloEvents().subscribe()
+                // And subscribe to it with at least once processing semantics.
+                .atLeastOnce(
+                        // Create a flow that emits a Done for each message it processes
+                        Flow.<HelloEvent>create().mapAsync(1, event -> {
 
-          if (event instanceof HelloEvent.GreetingMessageChanged) {
-            HelloEvent.GreetingMessageChanged messageChanged = (HelloEvent.GreetingMessageChanged) event;
-            // Update the message
-            return repository.updateMessage(messageChanged.getName(), messageChanged.getMessage());
+                            if (event instanceof HelloEvent.GreetingMessageChanged) {
+                                HelloEvent.GreetingMessageChanged messageChanged = (HelloEvent.GreetingMessageChanged) event;
+                                // Update the message
+                                return repository.updateMessage(messageChanged.getName(), messageChanged.getMessage());
 
-          } else {
-            // Ignore all other events
-            return CompletableFuture.completedFuture(Done.getInstance());
-          }
-        })
-      );
+                            } else {
+                                // Ignore all other events
+                                return CompletableFuture.completedFuture(Done.getInstance());
+                            }
+                        })
+                );
 
-  }
+    }
 }

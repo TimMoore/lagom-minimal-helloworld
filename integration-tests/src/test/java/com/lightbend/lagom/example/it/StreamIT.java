@@ -5,13 +5,13 @@ import akka.stream.ActorMaterializer;
 import akka.stream.Materializer;
 import akka.stream.javadsl.Sink;
 import akka.stream.javadsl.Source;
+import com.lightbend.lagom.example.hello.api.GreetingMessage;
+import com.lightbend.lagom.example.hello.api.HelloService;
+import com.lightbend.lagom.example.stream.api.StreamService;
 import com.lightbend.lagom.javadsl.client.integration.LagomClientFactory;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import com.lightbend.lagom.example.stream.api.StreamService;
-import com.lightbend.lagom.example.hello.api.GreetingMessage;
-import com.lightbend.lagom.example.hello.api.HelloService;
 
 import java.net.URI;
 import java.util.Arrays;
@@ -76,8 +76,6 @@ public class StreamIT {
             system.terminate();
         }
     }
-
-
 
 
 }
