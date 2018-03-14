@@ -17,7 +17,7 @@ import static com.lightbend.lagom.javadsl.api.Service.pathCall;
 public interface HelloService extends Service {
 
     /**
-     * Example: curl http://localhost:9000/api/hello/Alice
+     * Example: curl http://localhost:9000/hello/Alice
      */
     ServiceCall<NotUsed, String> hello(String id);
 
